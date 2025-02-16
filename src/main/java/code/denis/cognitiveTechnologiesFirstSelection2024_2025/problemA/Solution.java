@@ -1,8 +1,6 @@
-package code.denis.cognitiveTechnologiesFirstSelection2024_2025.problemB;
+package code.denis.cognitiveTechnologiesFirstSelection2024_2025.problemA;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.StringTokenizer;
 
 public class Solution {
@@ -10,67 +8,38 @@ public class Solution {
 
     public static void main(String[] args) {
         int t = input.nextInt();
-
-
+        StringBuilder ans = new StringBuilder();
         while (t > 0) {
             int n = input.nextInt();
-            Pair[] pairs = new Pair[2 * n];
-            for (int i = 0; i < 2 * n; i++) {
-                pairs[i] = new Pair();
-            }
-
-
-            for (int i = 0; i < 2 * n; i++) {
-                long x = input.nextLong();
-                pairs[i].a = x;
-            }
-
-            for (int i = 0; i < 2 * n; i++) {
-                long x = input.nextLong();
-                pairs[i].b = x;
-            }
-
-            solve(pairs);
-
+            int m = input.nextInt();
+            ans.append(solve(n, m)).append('\n');
             t--;
         }
+        System.out.println(ans);
     }
 
-    private static void solve(Pair[] pairs) {
-        Arrays.sort(pairs, new PairComp());
+    private static String solve(int n, int m) {
+        StringBuilder ans = new StringBuilder();
 
-        long sum = 0;
-        for (int i = 0; i < pairs.length / 2; i++) {
-            sum += pairs[i].a;
-        }
-
-        for (int i = pairs.length / 2; i < pairs.length; i++) {
-            sum += pairs[i].b;
-        }
-        System.out.println(sum);
-
-    }
-
-    static class PairComp implements Comparator<Pair> {
-
-        @Override
-        public int compare(Pair o1, Pair o2) {
-            return Long.compare(o1.a - o1.b, o2.a - o2.b);
-        }
-    }
-
-    static class Pair {
-        public long a;
-        public long b;
-
-        public Pair(long a, long b) {
-            this.a = a;
-            this.b = b;
-        }
-
-        public Pair() {
+        if (n > m) {
+            ans.append("-1");
+            return ans.toString();
+        } else {
+            while (true) {
+                if (m % n == 0) {
+                    int number = m / n;
+                    for (int j = 0; j < n; j++) {
+                        ans.append(number).append(" ");
+                    }
+                    return ans.toString();
+                }
+                ans.append(1).append(" ");
+                m--;
+                n--;
+            }
         }
     }
+
 
     static class Reader extends PrintWriter {
         private BufferedReader r;

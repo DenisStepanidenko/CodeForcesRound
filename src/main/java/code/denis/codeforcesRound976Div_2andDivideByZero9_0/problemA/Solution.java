@@ -1,8 +1,6 @@
-package code.denis.cognitiveTechnologiesFirstSelection2024_2025.problemB;
+package code.denis.codeforcesRound976Div_2andDivideByZero9_0.problemA;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.StringTokenizer;
 
 public class Solution {
@@ -11,66 +9,27 @@ public class Solution {
     public static void main(String[] args) {
         int t = input.nextInt();
 
-
         while (t > 0) {
             int n = input.nextInt();
-            Pair[] pairs = new Pair[2 * n];
-            for (int i = 0; i < 2 * n; i++) {
-                pairs[i] = new Pair();
+            int k = input.nextInt();
+
+            if (n < k) {
+                System.out.println(n);
+            }
+            else if(n == k){
+                System.out.println(1);
+            }
+            else{
+                // случай n > k
+
+
             }
 
-
-            for (int i = 0; i < 2 * n; i++) {
-                long x = input.nextLong();
-                pairs[i].a = x;
-            }
-
-            for (int i = 0; i < 2 * n; i++) {
-                long x = input.nextLong();
-                pairs[i].b = x;
-            }
-
-            solve(pairs);
 
             t--;
         }
     }
 
-    private static void solve(Pair[] pairs) {
-        Arrays.sort(pairs, new PairComp());
-
-        long sum = 0;
-        for (int i = 0; i < pairs.length / 2; i++) {
-            sum += pairs[i].a;
-        }
-
-        for (int i = pairs.length / 2; i < pairs.length; i++) {
-            sum += pairs[i].b;
-        }
-        System.out.println(sum);
-
-    }
-
-    static class PairComp implements Comparator<Pair> {
-
-        @Override
-        public int compare(Pair o1, Pair o2) {
-            return Long.compare(o1.a - o1.b, o2.a - o2.b);
-        }
-    }
-
-    static class Pair {
-        public long a;
-        public long b;
-
-        public Pair(long a, long b) {
-            this.a = a;
-            this.b = b;
-        }
-
-        public Pair() {
-        }
-    }
 
     static class Reader extends PrintWriter {
         private BufferedReader r;
